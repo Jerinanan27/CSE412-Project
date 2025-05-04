@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Hotel</title>
+  <style>
+    body { font-family: Arial; background-color: #f9f9f9; padding: 20px; }
+    .form-box { max-width: 500px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; }
+    input { width: 100%; padding: 10px; margin: 10px 0; }
+    button { background: #28a745; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    .back { margin-top: 10px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Book Hotel</h2>
+    <form method="POST" action="book_hotel.php">
+      <input type="hidden" name="hotel_id" id="hotel_id">
+      <label>Guest Name:</label>
+      <input type="text" name="guest_name" required>
+      <label>Email:</label>
+      <input type="email" name="email" required>
+      <label>Number of Rooms:</label>
+      <input type="number" name="rooms" min="1" required>
+      <label>Check-in:</label>
+      <input type="date" name="checkin" required>
+      <label>Check-out:</label>
+      <input type="date" name="checkout" required>
+      <button type="submit">Confirm Booking</button>
+    </form>
+    <a class="back" href="search_hotels.html">← Back</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('hotel_id').value = params.get('hotel_id');
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Flight</title>
+  <style>
+    body { font-family: Arial; background: #f9f9f9; padding: 20px; }
+    .form-box { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+    input { width: 100%; padding: 10px; margin: 10px 0; }
+    button { background: #28a745; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Confirm Flight Booking</h2>
+    <form method="POST" action="book_flight.php">
+      <input type="hidden" name="flight_id" id="flight_id">
+      <label>Passenger Name:</label>
+      <input type="text" name="passenger_name" required>
+      <label>Email:</label>
+      <input type="email" name="email" required>
+      <label>Seats:</label>
+      <input type="number" name="seats" required min="1">
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('flight_id').value = params.get('flight_id');
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+  <style>
+    body { font-family: Arial; background: #e8f0fe; margin: 0; padding: 0; }
+    .header { background: #003366; color: white; padding: 15px; text-align: center; }
+    .container { padding: 20px; max-width: 1000px; margin: auto; }
+    .card {
+      background: white;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    a.button {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      margin: 10px 5px;
+      border-radius: 5px;
+    }
+    a.button:hover {
+      background: #0056b3;
+    }
+    .logout {
+      background: #dc3545;
+    }
+    .logout:hover {
+      background: #a71d2a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Welcome to Your Dashboard</h1>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h2>Your Profile</h2>
+      <p><strong>Name:</strong> John Doe</p>
+      <p><strong>Email:</strong> johndoe@example.com</p>
+    </div>
+
+    <div class="card">
+      <h2>Your Bookings</h2>
+      <a class="button" href="view_flight_bookings.php">View Flight Bookings</a>
+      <a class="button" href="view_hotel_bookings.php">View Hotel Bookings</a>
+    </div>
+
+    <div class="card">
+      <h2>Your Wishlist</h2>
+      <a class="button" href="wishlist.html">Manage Wishlist</a>
+    </div>
+
+    <div class="card">
+      <h2>Feedback & Complaints</h2>
+      <a class="button" href="feedback.html">Give Feedback</a>
+      <a class="button" href="complaint.html">Submit Complaint</a>
+    </div>
+
+    <div class="card">
+      <a class="button logout" href="logout.php">Logout</a>
+    </div>
+  </div>
+
+</body>
+</html>

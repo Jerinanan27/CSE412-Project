@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Hotels</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background-color: #eef2f3; }
+    .container { max-width: 700px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; }
+    input, select { width: 100%; padding: 10px; margin: 10px 0; }
+    button { background-color: #007bff; color: white; border: none; padding: 10px 20px; cursor: pointer; }
+    .back { margin-top: 10px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Hotel Search</h2>
+    <form method="POST" action="search_hotels.php">
+      <label>Location:</label>
+      <input type="text" name="location" required>
+      <label>Check-in Date:</label>
+      <input type="date" name="checkin" required>
+      <label>Check-out Date:</label>
+      <input type="date" name="checkout" required>
+      <button type="submit">Search</button>
+    </form>
+    <a class="back" href="home.html">← Back to Home</a>
+  </div>
+</body>
+</html>
+''
