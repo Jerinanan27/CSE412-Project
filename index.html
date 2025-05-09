@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airplane Ticket Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
+        <div class="text-xl font-bold flex items-center">
+            <i class="fas fa-plane-departure mr-2"></i> AirTicket
+        </div>
+        <div>
+            <a href="#" class="px-3"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="px-3"><i class="fas fa-plane"></i> Flights</a>
+            <a href="#" class="px-3"><i class="fas fa-question-circle"></i> Help Center</a>
+            <a href="#" class="px-3"><i class="fas fa-user-shield"></i> Admin Panel</a>
+            <a href="#" class="px-3"><i class="fas fa-history"></i> Passenger History</a>
+            <a href="#" class="px-3"><i class="fas fa-sign-in-alt"></i> Login</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <div class="relative h-96 bg-cover bg-center" style="background-image: url('https://source.unsplash.com/1600x900/?airplane,travel');">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+            <h1 class="text-4xl font-bold"><i class="fas fa-ticket-alt"></i> Book Your Flight Now</h1>
+            <p class="text-lg">Find the best deals on airline tickets</p>
+        </div>
+    </div>
+    
+    <!-- Flight Search & Booking Section -->
+    <div class="container mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <h2 class="text-2xl font-bold mb-4"><i class="fas fa-search"></i> Flight Search & Booking</h2>
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+            <!-- From -->
+            <div>
+                <label for="from" class="block text-sm font-semibold mb-2">From</label>
+                <input type="text" id="from" placeholder="From" class="p-2 border rounded">
+            </div>
+            <!-- To -->
+            <div>
+                <label for="to" class="block text-sm font-semibold mb-2">To</label>
+                <input type="text" id="to" placeholder="To" class="p-2 border rounded">
+            </div>
+            <!-- Passengers -->
+            <div>
+                <label for="passengers" class="block text-sm font-semibold mb-2">Passengers</label>
+                <input type="number" id="passengers" placeholder="1 Passenger" class="p-2 border rounded">
+            </div>
+            <!-- Class -->
+            <div>
+                <label for="class" class="block text-sm font-semibold mb-2">Class</label>
+                <select id="class" class="p-2 border rounded">
+                    <option value="Economy">Economy</option>
+                    <option value="Business">Business</option>
+                    <option value="First Class">First Class</option>
+                </select>
+            </div>
+            <!-- Departure Date -->
+            <div>
+                <label for="departureDate" class="block text-sm font-semibold mb-2">Departure Date</label>
+                <input type="date" id="departureDate" class="p-2 border rounded">
+            </div>
+            <!-- Return Date -->
+            <div>
+                <label for="returnDate" class="block text-sm font-semibold mb-2">Return Date</label>
+                <input type="date" id="returnDate" class="p-2 border rounded">
+            </div>
+        </div>
+        <div class="flex items-center justify-start space-x-4 mt-4">
+            <!-- Round Trip Options -->
+            <div>
+                <label for="roundTrip" class="mr-2">Round Trip</label>
+                <input type="radio" id="roundTrip" name="tripType" checked class="mr-2">
+                <label for="oneWay">One Way</label>
+                <input type="radio" id="oneWay" name="tripType" class="mr-2">
+            </div>
+        </div>
+        <button onclick="searchFlights()" class="mt-4 bg-blue-600 text-white p-2 rounded flex items-center">
+            <i class="fas fa-plane mr-2"></i> Search Flights
+        </button>
+    </div>
+
+    <!-- Top Flight Deals Section -->
+    <div class="container mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <h3 class="text-2xl font-bold mb-4">Top Flight Deals</h3>
+        <div class="flex space-x-6">
+            <div class="w-1/3">
+                <img src="https://via.placeholder.com/300x150" alt="Deal 1" class="w-full h-auto rounded-lg">
+                <p class="text-center mt-2">Save 12% on Flights</p>
+            </div>
+            <div class="w-1/3">
+                <img src="https://via.placeholder.com/300x150" alt="Deal 2" class="w-full h-auto rounded-lg">
+                <p class="text-center mt-2">Special Student Fare with Extra Baggage</p>
+            </div>
+            <div class="w-1/3">
+                <img src="https://via.placeholder.com/300x150" alt="Deal 3" class="w-full h-auto rounded-lg">
+                <p class="text-center mt-2">50% Discount on Domestic Flights</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Most Popular Airlines Section -->
+    <div class="container mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <h3 class="text-2xl font-bold mb-4">Most Popular Airlines</h3>
+        <div class="flex space-x-6 overflow-x-auto">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Biman_Bangladesh_Airlines_logo.svg/1280px-Biman_Bangladesh_Airlines_logo.svg.png" alt="Biman Bangladesh Airlines" class="h-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Emirates_logo_2016.svg/1200px-Emirates_logo_2016.svg.png" alt="Emirates" class="h-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Malaysia_Airlines_logo.svg/1200px-Malaysia_Airlines_logo.svg.png" alt="Malaysia Airlines" class="h-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Himalaya_Airlines_logo.svg/1280px-Himalaya_Airlines_logo.svg.png" alt="Himalaya Airlines" class="h-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/British_Airways_logo_2013.svg/1200px-British_Airways_logo_2013.svg.png" alt="British Airways" class="h-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Singapore_Airlines_logo_2013.svg/1200px-Singapore_Airlines_logo_2013.svg.png" alt="Singapore Airlines" class="h-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Turkish_Airlines_logo_2015.svg/1200px-Turkish_Airlines_logo_2015.svg.png" alt="Turkish Airlines" class="h-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Qatar_Airways_logo_2015.svg/1200px-Qatar_Airways_logo_2015.svg.png" alt="Qatar Airways" class="h-20">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Eithad_Airways_logo.svg/1200px-Eithad_Airways_logo.svg.png" alt="Etihad Airways" class="h-20">
+        </div>
+    </div>
+
+    <!-- Cheapest Flight By Destination Section -->
+    <div class="container mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+        <h3 class="text-2xl font-bold mb-4">Search Cheapest Flight By Destination</h3>
+        <div class="flex justify-between mb-4">
+            <button class="px-4 py-2 bg-blue-600 text-white rounded">Domestic</button>
+            <button class="px-4 py-2 bg-blue-600 text-white rounded">International</button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Flight Option Cards -->
+            <div class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-md">
+                <p class="font-semibold">Dhaka</p>
+                <i class="fas fa-plane text-blue-600 my-2"></i>
+                <p>Agartala</p>
+            </div>
+            <div class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-md">
+                <p class="font-semibold">Dhaka</p>
+                <i class="fas fa-plane text-blue-600 my-2"></i>
+                <p>Colombo</p>
+            </div>
+            <div class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-md">
+                <p class="font-semibold">Dhaka</p>
+                <i class="fas fa-plane text-blue-600 my-2"></i>
+                <p>Delhi</p>
+            </div>
+            <div class="flex flex-col items-center bg-gray-100 p-4 rounded-lg shadow-md">
+                <p class="font-semibold">Dhaka</p>
+                <i class="fas fa-plane text-blue-600 my-2"></i>
+                <p>London</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat with Support Section -->
+    <div class="fixed bottom-0 right-0 p-4">
+        <div class="bg-blue-600 p-4 rounded-full text-white flex items-center justify-center cursor-pointer">
+            <i class="fas fa-comment-alt mr-2"></i> Chat with us!
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 p-4 text-white text-center mt-10">
+        <p class="text-lg font-bold">Deployed by <span class="text-yellow-300">Noob Coders</span></p>
+    </footer>
+    
+    <script>
+        function searchFlights() {
+            alert("Searching for flights...");
+        }
+    </script>
+</body>
+</html>
