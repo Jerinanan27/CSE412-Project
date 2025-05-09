@@ -1,0 +1,92 @@
+<!-- Add this above the form actions in booking/create.php -->
+<div class="promo-code-section">
+    <h3>Apply Promo Code</h3>
+    <div class="promo-code-input">
+        <input type="text" id="promo_code_input" placeholder="Enter promo code">
+        <button type="button" id="apply_promo" class="btn-secondary">Apply</button>
+    </div>
+    <div id="promo_code_message" class="promo-message"></div>
+</div>
+
+<div class="price-summary">
+    <div class="price-row">
+        <span>Base Price (x<?php echo $passenger_count; ?>):</span>
+        <span id="base_price">$<?php echo number_format($price * $passenger_count, 2); ?></span>
+    </div>
+    <div class="price-row">
+        <span>Baggage Fee:</span>
+        <span id="baggage_fee">$0.00</span>
+    </div>
+    <div class="price-row promo-row" style="display:none;">
+        <span>Promo Discount:</span>
+        <span id="promo_discount">-$0.00</span>
+    </div>
+    <div class="price-row total">
+        <span>Total Price:</span>
+        <span id="total_price">$<?php echo number_format($price * $passenger_count, 2); ?></span>
+    </div>
+</div>
+
+<script>
+// Promo code application
+document.getElementById('apply_promo').addEventListener('click', function() {
+    const promoCode = document.getElementById('promo_code_input').value.trim();
+    const basePrice = <?php echo $price * $passenger_count; ?>;
+    const baggageCount = parseInt(document.getElementById('baggage').value);
+    const baggageFee = baggageCount * 30;
+    
+    if (!promoCode) {
+        document.getElementById('promo_code_message').textContent = 'Please enter a promo code';
+        document.getElementById('promo_code_message').className = 'promo-message error';
+        return;
+    }
+    
+    // AJAX check for promo code
+    fetch('/api/check_promo.php?code=' + encodeURIComponent(promoCode) + '&amount=' + (basePrice + baggageFee))
+        .then(response => response.json())
+        .then(data => {
+            const messageEl = document.getElementById('promo_code_message');
+            const promoRow = document.querySelector('.promo-row');
+            const totalEl = document.getElementById('total_price');
+            
+            if (data.valid) {
+                messageEl.textContent = data.message;
+                messageEl.className = 'promo-message success';
+                
+                // Show discount
+                promoRow.style.display = 'flex';
+                document.getElementById('promo_discount').textContent = 
+                    data.discount_type === 'percentage' 
+                    ? `-$${(data.discount_amount).toFixed(2)} (${data.discount_value}%)`
+                    : `-$${(data.discount_amount).toFixed(2)}`;
+                
+                // Update total
+                const total = basePrice + baggageFee - data.discount_amount;
+                totalEl.textContent = '$' + total.toFixed(2);
+                
+                // Update hidden form field
+                document.getElementById('promo_code').value = promoCode;
+            } else {
+                messageEl.textContent = data.message;
+                messageEl.className = 'promo-message error';
+                promoRow.style.display = 'none';
+                totalEl.textContent = '$' + (basePrice + baggageFee).toFixed(2);
+                document.getElementById('promo_code').value = '';
+            }
+        });
+});
+
+// Update baggage fee display
+document.getElementById('baggage').addEventListener('change', function() {
+    const baggageFee = parseInt(this.value) * 30;
+    document.getElementById('baggage_fee').textContent = '$' + baggageFee.toFixed(2);
+    
+    // Recalculate total if promo is applied
+    if (document.getElementById('promo_code').value) {
+        document.getElementById('apply_promo').click();
+    } else {
+        const basePrice = <?php echo $price * $passenger_count; ?>;
+        document.getElementById('total_price').textContent = '$' + (basePrice + baggageFee).toFixed(2);
+    }
+});
+</script>

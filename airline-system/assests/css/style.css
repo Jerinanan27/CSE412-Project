@@ -1,0 +1,32 @@
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('../images/hero-bg.jpg') no-repeat center/cover;
+    padding: 100px 0;
+}
+
+.card {
+    transition: transform 0.3s;
+    margin-bottom: 20px;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Forms */
+.form-control:focus {
+    border-color: #0066cc;
+    box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section { padding: 60px 0; }
+}
