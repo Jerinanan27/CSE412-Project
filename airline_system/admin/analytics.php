@@ -1,7 +1,10 @@
 <?php
-require_once '../../includes/config.php';
-require_once '../../includes/db_connect.php';
-require_once '../../includes/functions.php';
+require_once '../includes/config.php';
+require_once '../includes/db_connect.php';
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
+
+
 require_admin();
 
 // Get booking trends (last 30 days)
@@ -33,7 +36,7 @@ $user_registrations = $pdo->query("
 ")->fetchAll();
 
 $page_title = "Analytics Dashboard";
-include '../../includes/admin_header.php';
+include '../includes/header.php';
 ?>
 
 <div class="container">

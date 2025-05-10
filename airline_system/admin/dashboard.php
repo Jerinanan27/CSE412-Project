@@ -54,7 +54,8 @@ include '../includes/header.php';
             <div class="card text-white bg-warning">
                 <div class="card-body">
                     <h5 class="card-title">Revenue</h5>
-                    <p class="display-4">$<?= number_format($revenue, 2) ?></p>
+                   <p class="display-4">$<?= number_format((float) ($revenue ?? 0), 2) ?></p>
+
                 </div>
             </div>
         </div>

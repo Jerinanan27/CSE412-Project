@@ -6,7 +6,7 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 
 // Application Configuration
-define('BASE_URL', 'http://localhost:8080/airline_system');
+define('BASE_URL', 'http://localhost/airline_system');
 define('SITE_NAME', 'SkyHigh Airlines');
 
 // Session Configuration
