@@ -25,10 +25,11 @@
             <p class="text-center mb-0">&copy; <?= date('Y') ?> <?= SITE_NAME ?>. All rights reserved.</p>
         </div>
     </footer>
-    <script src="<?= BASE_URL ?>/assets/js/jquery-3.5.1.min.js"></script>
-    <script src="<?= BASE_URL ?>/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>
     <?php if (isset($custom_js)): ?>
         <script src="<?= BASE_URL ?>/assets/js/<?= $custom_js ?>"></script>
     <?php endif; ?>
-</body>
-</html>
+    </body>
+
+    </html>

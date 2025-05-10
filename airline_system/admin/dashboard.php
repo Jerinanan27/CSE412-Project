@@ -1,8 +1,8 @@
 <?php
-require_once '../../includes/config.php';
-require_once '../../includes/db_connect.php';
-require_once '../../includes/auth.php';
-require_once '../../includes/functions.php';
+require_once  '../includes/config.php';
+require_once '../includes/db_connect.php';
+require_once '../includes/auth.php';
+require_once '../includes/functions.php';
 require_admin();
 
 // Get stats
@@ -19,7 +19,7 @@ $recent_bookings = $pdo->query("SELECT b.*, u.username, f.flight_number
                                 ORDER BY b.created_at DESC LIMIT 5")->fetchAll();
 
 $page_title = "Admin Dashboard";
-include '../../includes/admin_header.php';
+include '../includes/header.php';
 ?>
 
 <div class="container">
@@ -116,4 +116,4 @@ include '../../includes/admin_header.php';
     </div>
 </div>
 
-<?php include '../../includes/footer.php'; ?>
+<?php include '../includes/footer.php'; ?>

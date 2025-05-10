@@ -1,7 +1,8 @@
 <?php
 require_once '../../includes/config.php';
-require_once '../../includes/db_connect.php';
+require_once '../includes/db_connect.php';
 require_once '../../includes/functions.php';
+require_once '../../includes/auth.php';
 require_admin();
 
 // Handle user actions
@@ -9,24 +10,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update_role'])) {
         $user_id = intval($_POST['user_id']);
         $role = sanitize($_POST['role']);
-        
+
         $stmt = $pdo->prepare("UPDATE users SET role = ? WHERE id = ?");
         $stmt->execute([$role, $user_id]);
         $success = "User role updated successfully!";
     } elseif (isset($_POST['delete_user'])) {
         $user_id = intval($_POST['user_id']);
-        
+
         try {
             $pdo->beginTransaction();
-            
+
             // Delete user's bookings first
             $stmt = $pdo->prepare("DELETE FROM bookings WHERE user_id = ?");
             $stmt->execute([$user_id]);
-            
+
             // Then delete the user
             $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
             $stmt->execute([$user_id]);
-            
+
             $pdo->commit();
             $success = "User deleted successfully!";
         } catch (PDOException $e) {
@@ -45,14 +46,14 @@ include '../../includes/admin_header.php';
 
 <div class="container">
     <h1>User Management</h1>
-    
+
     <?php if (isset($success)): ?>
         <div class="alert alert-success"><?= $success ?></div>
     <?php endif; ?>
     <?php if (isset($error)): ?>
         <div class="alert alert-danger"><?= $error ?></div>
     <?php endif; ?>
-    
+
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
