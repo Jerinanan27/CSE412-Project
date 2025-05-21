@@ -1,65 +1,136 @@
-    <footer class="bg-dark text-white py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <h5 class="text-uppercase fw-bold mb-4">About <?= SITE_NAME ?></h5>
-                    <p class="mb-4">We're revolutionizing travel with seamless booking experiences for flights and hotels worldwide. Our mission is to make your journeys unforgettable.</p>
-                    <div class="d-flex">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <h5 class="text-uppercase fw-bold mb-4">Book</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="<?= BASE_URL ?>/flights/search.php" class="text-white text-decoration-none">Flights</a></li>
-                        <li class="mb-2"><a href="<?= BASE_URL ?>/hotels/" class="text-white text-decoration-none">Hotels</a></li>
-                        
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <h5 class="text-uppercase fw-bold mb-4">Help</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="<?= BASE_URL ?>/faq.php" class="text-white text-decoration-none">FAQs</a></li>
-                        <li class="mb-2"><a href="<?= BASE_URL ?>/contact.php" class="text-white text-decoration-none">Contact Us</a></li>
-                        <li class="mb-2"><a href="<?= BASE_URL ?>/support.php" class="text-white text-decoration-none">Customer Support</a></li>
-                        <li class="mb-2"><a href="<?= BASE_URL ?>/feedback.php" class="text-white text-decoration-none">Feedback</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <h5 class="text-uppercase fw-bold mb-4">Newsletter</h5>
-                    <p>Subscribe for exclusive deals and travel tips</p>
-                    <form class="mb-3">
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Your email" required>
-                            <button class="btn btn-primary" type="submit">Join</button>
-                        </div>
-                    </form>
-                    <div class="d-flex align-items-center mb-2">
-                        <i class="fas fa-phone-alt me-2"></i>
-                        <span>+1 (800) 123-4567</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-envelope me-2"></i>
-                        <span>contact@<?= strtolower(str_replace(' ', '', SITE_NAME)) ?>.com</span>
-                    </div>
+<style>
+    footer {
+       background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: #ffffff;
+    }
+
+    footer a {
+        color: #ffffff;
+        transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+        color: #d1ecff;
+        text-decoration: underline;
+    }
+
+    .chatbot-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #0d6efd;
+        color: white;
+        border-radius: 50%;
+        padding: 15px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+    }
+
+    .chatbot-container {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 320px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        z-index: 999;
+        overflow: hidden;
+    }
+
+    .chatbot-header {
+        background-color: #0d6efd;
+        color: white;
+        padding: 10px 15px;
+        font-weight: bold;
+    }
+
+    .chatbot-body {
+        padding: 15px;
+        height: 250px;
+        overflow-y: auto;
+        background-color: #f8f9fa;
+    }
+
+    .chatbot-footer {
+        padding: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    .chatbot-footer input {
+        border-radius: 20px 0 0 20px;
+        border: 1px solid #ccc;
+    }
+
+    .chatbot-footer button {
+        border-radius: 0 20px 20px 0;
+    }
+</style>
+
+<footer class="py-4 text-white">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <h5 class="text-uppercase fw-bold mb-4">About <?= SITE_NAME ?></h5>
+                <p>We're revolutionizing travel with seamless booking experiences for flights and hotels worldwide. Our mission is to make your journeys unforgettable.</p>
+                <div class="d-flex">
+                    <a href="#" class="me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                    <a href="#" class="me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in fa-lg"></i></a>
                 </div>
             </div>
-            <hr class="my-4 bg-secondary">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <p class="mb-0">&copy; <?= date('Y') ?> <?= SITE_NAME ?>. All rights reserved.</p>
+            <div class="col-lg-2 col-md-4">
+                <h5 class="text-uppercase fw-bold mb-4">Book</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="<?= BASE_URL ?>/flights/search.php">Flights</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>/hotels/">Hotels</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-4">
+                <h5 class="text-uppercase fw-bold mb-4">Help</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="<?= BASE_URL ?>/faq.php">FAQs</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>/contact.php">Contact Us</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>/support.php">Customer Support</a></li>
+                    <li class="mb-2"><a href="<?= BASE_URL ?>/feedback.php">Feedback</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h5 class="text-uppercase fw-bold mb-4">Newsletter</h5>
+                <p>Subscribe for exclusive deals and travel tips</p>
+                <form class="mb-3">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Your email" required>
+                        <button class="btn btn-light text-primary" type="submit">Join</button>
+                    </div>
+                </form>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="fas fa-phone-alt me-2"></i>
+                    <span>+1 (800) 123-4567</span>
                 </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="<?= BASE_URL ?>/privacy.php" class="text-white text-decoration-none me-3">Privacy Policy</a>
-                    <a href="<?= BASE_URL ?>/terms.php" class="text-white text-decoration-none me-3">Terms</a>
-                    <a href="<?= BASE_URL ?>/cookies.php" class="text-white text-decoration-none">Cookies</a>
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-envelope me-2"></i>
+                    <span>contact@<?= strtolower(str_replace(' ', '', SITE_NAME)) ?>.com</span>
                 </div>
             </div>
         </div>
-    </footer>
+        <hr class="my-4 bg-light">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <p class="mb-0">&copy; <?= date('Y') ?> <?= SITE_NAME ?>. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a href="<?= BASE_URL ?>/privacy.php" class="me-3">Privacy Policy</a>
+                <a href="<?= BASE_URL ?>/terms.php" class="me-3">Terms</a>
+                <a href="<?= BASE_URL ?>/cookies.php">Cookies</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
     <!-- Chatbot Elements -->
     <div class="chatbot-icon" onclick="toggleChatbot()">

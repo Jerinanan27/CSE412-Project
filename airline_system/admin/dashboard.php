@@ -76,10 +76,12 @@ include '../includes/header.php';
                                 <div class="list-group-item">
                                     <div class="d-flex justify-content-between">
                                         <h5 class="mb-1">#<?= $booking['booking_reference'] ?></h5>
-                                        <span class="badge 
-                                            <?= $booking['status'] == 'confirmed' ? 'badge-success' : ($booking['status'] == 'cancelled' ? 'badge-danger' : 'badge-warning') ?>">
-                                            <?= ucfirst($booking['status']) ?>
-                                        </span>
+                                       <span class="badge 
+    <?= $booking['status'] == 'confirmed' ? 'bg-success text-white' : 
+       ($booking['status'] == 'cancelled' ? 'bg-danger text-white' : 
+       'bg-warning text-dark') ?>">
+    <?= ucfirst($booking['status']) ?>
+</span>
                                     </div>
                                     <p class="mb-1">Flight: <?= $booking['flight_number'] ?></p>
                                     <small>User: <?= $booking['username'] ?></small>
@@ -101,6 +103,7 @@ include '../includes/header.php';
                         <a href="<?= BASE_URL ?>/admin/flights.php" class="list-group-item list-group-item-action">
                             <i class="fas fa-plane mr-2"></i> Manage Flights
                         </a>
+            
                         <a href="<?= BASE_URL ?>/admin/bookings.php" class="list-group-item list-group-item-action">
                             <i class="fas fa-ticket-alt mr-2"></i> Manage Bookings
                         </a>
@@ -113,6 +116,7 @@ include '../includes/header.php';
                         <a href="<?= BASE_URL ?>/admin/analytics.php" class="list-group-item list-group-item-action">
                             <i class="fas fa-chart-bar mr-2"></i> View Analytics
                         </a>
+                       
                     </div>
                 </div>
             </div>

@@ -75,42 +75,71 @@ $page_title = "Register";
 include '../includes/header.php';
 ?>
 
-<div class="container">
-    <h1>Register</h1>
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1553570739-330b8db8a925?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fG9jZWFufGVufDB8fDB8fHww');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: relative;
+    }
+    
+    body::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.5); /* This creates the opacity effect */
+        z-index: -1;
+    }
+    
+    .card {
+        background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent card */
+        backdrop-filter: blur(5px); /* Optional: adds a blur effect to the background behind the card */
+    }
+</style>
 
-    <?php if ($error): ?>
-        <div class="alert alert-danger"><?= $error ?></div>
-    <?php endif; ?>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow p-4" style="min-width: 350px; max-width: 400px; width: 100%;">
+        <h2 class="text-center mb-4">Register</h2>
 
-    <?php if ($success): ?>
-        <div class="alert alert-success"><?= $success ?></div>
-    <?php endif; ?>
+        <?php if ($error): ?>
+            <div class="alert alert-danger text-center"><?= $error ?></div>
+        <?php endif; ?>
 
-    <form method="post">
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" name="username" class="form-control" required>
-        </div>
+        <?php if ($success): ?>
+            <div class="alert alert-success text-center"><?= $success ?></div>
+        <?php endif; ?>
 
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" class="form-control" required>
-        </div>
+        <form method="post">
+            <div class="form-group mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" id="username" class="form-control" required>
+            </div>
 
-        <div class="form-group">
-            <label>Password (min 8 characters)</label>
-            <input type="password" name="password" class="form-control" minlength="8" required>
-        </div>
+            <div class="form-group mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-control" required>
+            </div>
 
-        <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" name="confirm_password" class="form-control" required>
-        </div>
+            <div class="form-group mb-3">
+                <label for="password" class="form-label">Password (min 8 characters)</label>
+                <input type="password" name="password" id="password" class="form-control" minlength="8" required>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
-    </form>
+            <div class="form-group mb-4">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>
+            </div>
 
-    <p class="mt-3">Already have an account? <a href="<?= BASE_URL ?>/auth/login.php">Login here</a></p>
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+
+        <p class="mt-3 text-center">Already have an account? <a href="<?= BASE_URL ?>/auth/login.php">Login here</a></p>
+    </div>
 </div>
 
 <?php include '../includes/footer.php'; ?>

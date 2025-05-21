@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $booking_id = $_GET['booking_id'] ?? 0;
     
     if (!$booking_id) {
-        header("Location: ../user/dashboard.php?error=invalid_booking");
+        header("Location: " . BASE_URL . "/user/dashboard.php?error=invalid_booking");
         exit;
     }
 
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $pdo->commit();
 
         // Redirect back to dashboard with success message
-        header("Location: ../user/dashboard.php?cancel_success=1");
+        header("Location: " . BASE_URL . "/user/dashboard.php?cancel_success=1");
         exit;
 
     } catch (Exception $e) {

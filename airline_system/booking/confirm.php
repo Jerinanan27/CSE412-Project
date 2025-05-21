@@ -44,6 +44,90 @@ include '../includes/header.php';
         <p class="lead">Your flight has been successfully booked</p>
         <p>Booking Reference: <strong><?= $booking['booking_reference'] ?></strong></p>
     </div>
+
+    <!-- Dummy Feedback Popup -->
+    <div id="feedbackPopup" class="feedback-popup" style="display: none;">
+        <div class="feedback-content">
+            <h3>How was your booking experience?</h3>
+            <div class="rating-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="mt-3">
+                <textarea class="form-control" placeholder="Share your thoughts..." rows="3"></textarea>
+            </div>
+            <div class="text-end mt-3">
+                <button class="btn btn-secondary" id="skipFeedback">Skip</button>
+                <button class="btn btn-primary" id="submitFeedback">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div id="feedbackOverlay" class="feedback-overlay" style="display: none;"></div>
+
+    <style>
+        .feedback-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            width: 90%;
+            max-width: 500px;
+        }
+        .feedback-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .rating-stars i {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .rating-stars i.active {
+            color: #ffc107;
+        }
+    </style>
+
+    <script>
+        // Show feedback popup after 2 seconds
+        setTimeout(function() {
+            document.getElementById('feedbackPopup').style.display = 'block';
+            document.getElementById('feedbackOverlay').style.display = 'block';
+        }, 2000);
+
+        // Close popup when clicking overlay
+        document.getElementById('feedbackOverlay').addEventListener('click', function() {
+            closeFeedback();
+        });
+
+        // Handle skip
+        document.getElementById('skipFeedback').addEventListener('click', function() {
+            closeFeedback();
+        });
+
+        // Handle submit
+        document.getElementById('submitFeedback').addEventListener('click', function() {
+            alert('Thank you for your feedback!');
+            closeFeedback();
+        });
+
+        function closeFeedback() {
+            document.getElementById('feedbackPopup').style.display = 'none';
+            document.getElementById('feedbackOverlay').style.display = 'none';
+        }
+    </script>
     
     <div class="card mb-4">
         <div class="card-header">

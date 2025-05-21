@@ -1,12 +1,12 @@
 <?php
 // Database Configuration
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'airline_management_v2');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_HOST', 'sql110.infinityfree.com');
+define('DB_NAME', 'if0_39005639_sky_high_v2');
+define('DB_USER', 'if0_39005639');
+define('DB_PASS', 'NVbtNNXMGe');
 
 // Application Configuration
-define('BASE_URL', 'http://localhost/airline_system');
+define('BASE_URL', 'https://skyhigh.kesug.com');
 define('SITE_NAME', 'SkyHigh Airlines');
 
 // Session Configuration

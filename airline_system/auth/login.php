@@ -40,31 +40,63 @@ $page_title = "Login";
 include '../includes/header.php';
 ?>
 
-<div class="container ">
-    <h1>Login</h1>
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1553570739-330b8db8a925?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fG9jZWFufGVufDB8fDB8fHww');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        position: relative;
+    }
+    
+    body::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.5); /* This creates the opacity effect */
+        z-index: -1;
+    }
+    
+    .card {
+        background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent card */
+        backdrop-filter: blur(5px); /* Optional: adds a blur effect to the background behind the card */
+    }
+</style>
 
-    <?php if (isset($_GET['registered'])): ?>
-        <div class="alert alert-success">Registration successful! Please login.</div>
-    <?php endif; ?>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
+        <h2 class="text-center mb-4">Please Sign in</h2>
+        <p class=" text-secondary text-center  ">You need to sign in first to continue</p>
 
-    <?php if ($error): ?>
-        <div class="alert alert-danger"><?= $error ?></div>
-    <?php endif; ?>
+        <?php if (isset($_GET['registered'])): ?>
+            <div class="alert alert-success text-center">Registration successful! Please login.</div>
+        <?php endif; ?>
 
-    <form method="post">
-        <div class="form-group">
-            <label>Username or Email</label>
-            <input type="text" name="username" class="form-control" required>
-        </div>
+        <?php if ($error): ?>
+            <div class="alert alert-danger text-center"><?= $error ?></div>
+        <?php endif; ?>
 
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
+        <form method="post">
+            <div class="form-group mb-3">
+                <label for="username">Username or Email</label>
+                <input type="text" id="username" name="username" class="form-control" required autofocus>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
-        <a href="<?= BASE_URL ?>/auth/register.php" class="btn btn-link">Register</a>
-    </form>
+            <div class="form-group mb-4">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+                <a href="<?= BASE_URL ?>/auth/register.php" class="btn btn-link">Register</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 <?php include '../includes/footer.php'; ?>

@@ -175,21 +175,47 @@ include '../includes/header.php';
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Departure Time</label>
-                            <input type="datetime-local" name="departure_time" class="form-control"
-                                value="<?= $edit_flight ? date('Y-m-d\TH:i', strtotime($edit_flight['departure_time'])) : '' ?>"
-                                required>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Arrival Time</label>
-                            <input type="datetime-local" name="arrival_time" class="form-control"
-                                value="<?= $edit_flight ? date('Y-m-d\TH:i', strtotime($edit_flight['arrival_time'])) : '' ?>"
-                                required>
-                        </div>
-                    </div>
+    <div class="form-group">
+        <label>Departure Time</label>
+        <input type="datetime-local" name="departure_time" id="departure_time" class="form-control"
+            value="<?= $edit_flight ? date('Y-m-d\TH:i', strtotime($edit_flight['departure_time'])) : '' ?>"
+            min="<?= date('Y-m-d\TH:i') ?>" required>
+    </div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Arrival Time</label>
+        <input type="datetime-local" name="arrival_time" id="arrival_time" class="form-control"
+            value="<?= $edit_flight ? date('Y-m-d\TH:i', strtotime($edit_flight['arrival_time'])) : '' ?>"
+            required>
+    </div>
+</div>
+
+<script>
+    const departureInput = document.getElementById('departure_time');
+    const arrivalInput = document.getElementById('arrival_time');
+
+    // Set initial minimums
+    const now = new Date().toISOString().slice(0, 16);
+    departureInput.min = now;
+
+    // When departure time changes, update arrival time min
+    departureInput.addEventListener('change', () => {
+        arrivalInput.min = departureInput.value;
+        if (arrivalInput.value < departureInput.value) {
+            arrivalInput.value = departureInput.value; // auto-correct if invalid
+        }
+    });
+
+    // Optional: also prevent form submission if arrival < departure
+    document.querySelector('form').addEventListener('submit', function (e) {
+        if (arrivalInput.value < departureInput.value) {
+            e.preventDefault();
+            alert('Arrival time must be after departure time.');
+        }
+    });
+</script>
                 </div>
 
                 <div class="row">

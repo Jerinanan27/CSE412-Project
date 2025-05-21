@@ -78,7 +78,7 @@ include '../includes/header.php';
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Search Flights</button>
+                <button type="submit" class="btn btn-primary mt-3 px-4 py-2">Search Flights</button>
             </form>
         </div>
     </div>
@@ -101,6 +101,7 @@ include '../includes/header.php';
                                 <th>Duration</th>
                                 <th>Price</th>
                                 <th>Seats</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -110,17 +111,25 @@ include '../includes/header.php';
                                 $departure_time = new DateTime($flight['departure_time']);
                                 $arrival_time = new DateTime($flight['arrival_time']);
                                 $duration = $departure_time->diff($arrival_time);
-                                $price = $flight[$class . '_price'];
+                                $price = (float)($flight[$class . '_price'] ?? 0); // Ensure price is a float
                                 ?>
                                 <tr>
-                                    <td><?= $flight['flight_number'] ?></td>
-                                    <td><?= $flight['airline'] ?></td>
-                                    <td><?= $flight['departure_airport'] ?> to <?= $flight['arrival_airport'] ?></td>
+                                    <td><?= htmlspecialchars($flight['flight_number']) ?></td>
+                                    <td><?= htmlspecialchars($flight['airline']) ?></td>
+                                    <td><?= htmlspecialchars($flight['departure_airport']) ?> to <?= htmlspecialchars($flight['arrival_airport']) ?></td>
                                     <td><?= $departure_time->format('M j, Y H:i') ?></td>
                                     <td><?= $arrival_time->format('M j, Y H:i') ?></td>
                                     <td><?= $duration->format('%hh %im') ?></td>
                                     <td>$<?= number_format($price, 2) ?></td>
-                                    <td><?= $flight['available_seats'] ?></td>
+                                    <td><?= (int)$flight['available_seats'] ?></td>
+                                    <td>
+                                        <span class="badge rounded-pill 
+                                            <?= $flight['status'] == 'scheduled' ? 'bg-primary text-white' : 
+                                               ($flight['status'] == 'delayed' ? 'bg-warning text-dark' : 
+                                               ($flight['status'] == 'cancelled' ? 'bg-danger text-white' : 'bg-success text-white')) ?>">
+                                            <?= ucfirst($flight['status'] ?? 'scheduled') ?>
+                                        </span>
+                                    </td>
                                     <td>
                                         <a href="<?= BASE_URL ?>/booking/create.php?flight_id=<?= $flight['id'] ?>&class=<?= $class ?>"
                                             class="btn btn-sm btn-primary">Book Now</a>

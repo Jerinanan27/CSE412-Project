@@ -51,24 +51,42 @@ include '../includes/header.php';
                 </div>
             </div>
             
-            <form method="post" action="confirm_booking.php">
+            <form method="post" action="create.php">
                 <input type="hidden" name="hotel_id" value="<?php echo $hotel_id; ?>">
                 <input type="hidden" name="check_in" value="<?php echo $check_in; ?>">
                 <input type="hidden" name="check_out" value="<?php echo $check_out; ?>">
                 <input type="hidden" name="rooms" value="<?php echo $rooms; ?>">
                 <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
                 
-                <h3 class="mt-4">Payment Information</h3>
-                <div class="form-group">
-                    <label for="payment_method">Payment Method</label>
-                    <select name="payment_method" class="form-control" required>
-                        <option value="credit_card">Credit Card</option>
-                        <option value="debit_card">Debit Card</option>
-                        <option value="paypal">PayPal</option>
-                    </select>
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>Guest Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" name="first_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" name="last_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Special Requests</label>
+                            <textarea name="special_requests" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-block mt-4">Confirm Booking</button>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Continue to Payment</button>
             </form>
         </div>
     </div>

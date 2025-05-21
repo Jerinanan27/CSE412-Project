@@ -34,6 +34,23 @@ CREATE TABLE flights (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+
+
+CREATE TABLE hotels (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    location VARCHAR(100) NOT NULL,
+    description TEXT,
+    amenities TEXT,
+    price_per_night DECIMAL(10,2) NOT NULL,
+    rating DECIMAL(3,1),
+    available_rooms INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
 -- Sample flights
 INSERT INTO flights (flight_number, airline, departure_airport, arrival_airport, departure_time, arrival_time, economy_price, business_price, first_class_price, total_seats, available_seats) 
 VALUES 
@@ -117,17 +134,7 @@ INSERT INTO loyalty_rewards (name, points_required, discount_percent) VALUES
 ('Platinum Member', 5000, 15);
 
 
-CREATE TABLE hotels (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    location VARCHAR(100) NOT NULL,
-    description TEXT,
-    amenities TEXT,
-    price_per_night DECIMAL(10,2) NOT NULL,
-    rating DECIMAL(3,1),
-    available_rooms INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+
 
 CREATE TABLE hotel_bookings (
     id INT AUTO_INCREMENT PRIMARY KEY,

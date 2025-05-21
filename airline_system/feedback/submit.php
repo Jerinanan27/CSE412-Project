@@ -34,51 +34,118 @@ $page_title = "Submit Feedback";
 include '../includes/header.php';
 ?>
 
+<style>
+    .container {
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(5px);
+        border-radius: 10px;
+        padding: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    
+    .rating-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    /* Star rating styles - simplified and fixed */
+    .star-rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        font-size: 2rem;
+    }
+    
+    .star-rating input {
+        display: none;
+    }
+    
+    .star-rating label {
+        color: #ddd;
+        cursor: pointer;
+        padding: 0 5px;
+        transition: color 0.2s;
+    }
+    
+    /* When a radio is checked, all labels after it will be highlighted */
+    .star-rating input:checked ~ label {
+        color: #ffc107;
+    }
+    
+    /* When hovering, highlight the label that's hovered and all labels after it */
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: #ffc107;
+    }
+    
+    .rating-value {
+        margin-left: 15px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+    }
+</style>
+
 <div class="container">
-    <h1>Share Your Experience</h1>
     <?php if (isset($success)): ?>
-        <div class="alert alert-success"><?= $success ?></div>
+        <div class="alert alert-success"><?php echo $success; ?></div>
     <?php elseif (isset($error)): ?>
-        <div class="alert alert-danger"><?= $error ?></div>
+        <div class="alert alert-danger"><?php echo $error; ?></div>
     <?php endif; ?>
 
-    <form method="post">
-        <?php if ($booking_id): ?>
-            <input type="hidden" name="booking_id" value="<?= $booking_id ?>">
-            <p>You're reviewing <strong>Booking #<?= $booking_id ?></strong></p>
-        <?php endif; ?>
-
-        <div class="form-group">
-            <label>Rating</label><br>
-            <div class="rating">
-                <?php for ($i = 5; $i >= 1; $i--): ?>
-                    <input type="radio" id="star<?= $i ?>" name="rating" value="<?= $i ?>" required>
-                    <label for="star<?= $i ?>">★</label>
-                <?php endfor; ?>
+    <?php if ($booking_id): ?>
+        <form method="POST">
+            <div class="rating-container">
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                </div>
+                <span id="rating-text" class="rating-value">Not rated yet</span>
             </div>
-        </div>
-
-        <div class="form-group">
-            <label>Comments</label>
-            <textarea name="comments" class="form-control" rows="5" placeholder="What did you like or improve?"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+            
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <textarea class="form-control" id="comments" name="comments" rows="4"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+    <?php else: ?>
+        <div class="alert alert-warning">Invalid booking ID or you don't have permission to provide feedback for this booking.</div>
+    <?php endif; ?>
 </div>
 
-<style>
-.rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    font-size: 2rem;
-}
-.rating input { display: none; }
-.rating label { color: #ddd; cursor: pointer; }
-.rating input:checked ~ label,
-.rating label:hover,
-.rating label:hover ~ label { color: #ffc107; }
-</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('.star-rating input');
+    const ratingText = document.getElementById('rating-text');
+    
+    // Simple click event for each star
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            // Update the text display
+            ratingText.textContent = `${this.value}/5`;
+        });
+    });
+    
+    // Form validation
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const ratingSelected = document.querySelector('.star-rating input:checked');
+            if (!ratingSelected) {
+                e.preventDefault();
+                alert('Please select a rating before submitting.');
+            }
+        });
+    }
+});
+</script>
 
 <?php include '../includes/footer.php'; ?>

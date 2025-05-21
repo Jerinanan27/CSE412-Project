@@ -123,14 +123,28 @@ include '../includes/header.php';
                                     <td><?php echo $booking['passengers']; ?></td>
                                     <td>$<?php echo number_format($booking['total_price'], 2); ?></td>
                                     <td>
-                                        <span class="badge 
-                                            <?php
-                                            echo $booking['status'] == 'confirmed' ? 'badge-success' :
-                                                ($booking['status'] == 'cancelled' ? 'badge-danger' :
-                                                    ($booking['status'] == 'completed' ? 'badge-info' : 'badge-warning'));
-                                            ?>">
-                                            <?php echo ucfirst($booking['status']); ?>
-                                        </span>
+                                       <span style="
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    color: white;
+    background-color: 
+        <?php 
+            echo $booking['status'] == 'confirmed' ? '#28a745' :      // green
+                ($booking['status'] == 'cancelled' ? '#dc3545' :     // red
+                ($booking['status'] == 'completed' ? '#17a2b8' :     // blue
+                '#ffc107'));                                         // yellow
+        ?>;
+    <?php
+        // Special case: make text black for yellow background (warning)
+        if ($booking['status'] != 'confirmed' && $booking['status'] != 'cancelled' && $booking['status'] != 'completed') {
+            echo 'color: black;';
+        }
+    ?>
+">
+    <?php echo ucfirst($booking['status']); ?>
+</span>
                                     </td>
                                     <td><?php echo date('Y-m-d H:i', strtotime($booking['created_at'])); ?></td>
                                     <td>
